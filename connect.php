@@ -15,7 +15,7 @@ if(isset($_POST['submit'])) {
             //    $row = mysqli_fetch_array($query, MYSQLI_BOTH);
 
             $password = $_POST['password'];
-            $username = $_POST['username'];
+            $username = $_POST['user'];
 
             $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
             $stmt->bind_param("ss", $username, $password);
