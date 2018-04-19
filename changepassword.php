@@ -23,6 +23,7 @@ if(isset($_POST['submit'])) {
         $stmt->bind_result($daUsername, $daPassword);
         $stmt->fetch();
 	$stmt->close();
+	$newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         if($daUsername != NULL AND $daPassword != NULL) {
             $ustmt = $mysqli->prepare("UPDATE UsernamePassword SET password=? where username=? and password=?");
