@@ -8,8 +8,8 @@ if(isset($_SESSION['user'])) {
 
 include('password.php');
 
-$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name);
-if($connection->connect_errno) {
+$mysqli = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+if($mysqli->connect_errno) {
      die("Failed to connect to database: " .mysqli_error($connection));
 }
 
