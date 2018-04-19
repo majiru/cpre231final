@@ -1,0 +1,28 @@
+.comments{color: white; background: #252525; padding-left:20px;padding-top:30px;padding-bottom:30px;}
+body {
+  color:white;
+  margin: 0;
+  padding: 0;
+  font-family: Sans-serif;
+  background: #2c3e50;
+  display: table;
+}
+
+
+h2 {
+  padding: 20px;
+  color: #ecf0f1;
+}
+
+
+a {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+
+.myform{
+position:fixed;
+top:40%;
+left:25%;
+width:250px;
+}

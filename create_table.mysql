@@ -1,0 +1,7 @@
+CREATE DATABASE login_info;
+CREATE TABLE login_info.UsernamePassword (
+	usernameID int(9) NOT NULL auto_increment,
+	username VARCHAR(40) NOT NULL,
+	password VARCHAR(40) NOT NULL,
+	PRIMARY KEY(usernameId)
+);
