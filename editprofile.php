@@ -31,9 +31,9 @@ header("Location: index.html");
     <form method="POST" action="changepassword.php">
       Change Password (max 40 chars):
       <br>
-      Current Password: <input type="text" name="password" size="40">
+      Current Password: <input type="password" name="password" size="40">
       <br>
-      New Password: <input type="text" name="newpassword" size="40">
+      New Password: <input type="password" name="newpassword" size="40">
       <br>
       <input id="button" type="submit" name="submit" value="ChangePassword">
     </form>
