@@ -21,6 +21,7 @@ if(isset($_POST['submit'])) {
         $stmt->execute();
         $stmt->bind_result($daUsername, $daPassword);
         $stmt->fetch();
+	$stmt->close();
           //$query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$username' AND password = '$_POST[password]'");
         //$row = mysqli_fetch_array($query, MYSQLI_BOTH);
 
@@ -28,8 +29,10 @@ if(isset($_POST['submit'])) {
             $ustmt = $mysqli->prepare("UPDATE UsernamePassword SET password=? where username=? and password=?");
             $ustmt->bind_param("sss", $password, $daUsername, $daPassword);
             $ustmt->execute();
-        }
-    }
+            $ustmt->close();
+
+    	}
     header("Location: editprofile.php");
+    }
 }
 ?>
