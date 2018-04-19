@@ -27,7 +27,7 @@ if(isset($_POST['submit'])) {
         if($daUsername != NULL AND $daPassword != NULL) {
             $ustmt = $mysqli->prepare("UPDATE UsernamePassword SET password=? where username=? and password=?");
             $ustmt->bind_param("sss", $password, $daUsername, $daPassword);
-            $ustmt->execute()
+            $ustmt->execute();
         }
     }
     header("Location: editprofile.php");
