@@ -17,12 +17,15 @@ if(isset($_POST['submit'])) {
     if(!empty($_POST['password'])) {
         $password = $_POST['password'];
 	$newPassword = $_POST['newpassword'];
-        $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
-        $stmt->bind_param("ss", $username, $password);
+        $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=?");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->bind_result($daUsername, $daPassword);
         $stmt->fetch();
-	$stmt->close();
+        $stmt->close();
+        if(!password_verify($password, $daPassword)){
+            header("Location: editprofile.php");
+        }
 	$newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         if($daUsername != NULL AND $daPassword != NULL) {
