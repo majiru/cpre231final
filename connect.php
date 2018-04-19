@@ -17,16 +17,20 @@ if(isset($_POST['submit'])) {
             $password = $_POST['password'];
             $username = $_POST['user'];
 
-            $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
-            $stmt->bind_param("ss", $username, $password);
+            $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=?");
+            $stmt->bind_param("s", $username);
             $stmt->execute();
             $stmt->bind_result($daUsername, $daPassword);
             $stmt->fetch();
             $stmt->close();
 
             if($daUsername != null AND $daPassword != null){
-                $_SESSION['user'] = $daUsername;
-                header("Location: profile.php");
+                if(password_verify($password, $daPassword)){
+                    $_SESSION['user'] = $daUsername;
+                    header("Location: profile.php");
+                }else{
+                    header("Location: index.html");
+                }
             }else{
                 header("Location: index.html");
             }
