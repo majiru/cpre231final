@@ -11,13 +11,13 @@ header("Location: login.php");
 <html>
   <head>
 	<link rel="stylesheet" href="css/style.css">
-    <title><?php echo $username ?>'s Profile</title>
+    <title><?php echo htmlspecialchars($username) ?>'s Profile</title>
   </head>
   <body>
 	<div id="wrap">
 	<div id="regbar">
 	<div class="div-left">
-<h2>    Hello! You are logged in as <?php echo $username ?>. </h2>
+<h2>    Hello! You are logged in as <?php echo htmlspecialchars($username) ?>. </h2>
 	</div><div class="div-right">
 <h3>    <a href="editprofile.php">Edit Profile</a></h3>
 	</div>
@@ -37,7 +37,7 @@ header("Location: login.php");
 	<?php
 	$fh = fopen("../comments.txt",'r');
 	$text = fread($fh, 25000);
-	echo nl2br($text);
+	echo htmlspecialchars(nl2br($text));
 	?>
 	</div>
   </body>

@@ -10,13 +10,13 @@ header("Location: index.html");
 
 <html>
   <head>
-    <title>Edit Profile: <?php echo $username ?></title>
+    <title>Edit Profile: <?php echo htmlspecialchars($username) ?></title>
 	<link rel="stylesheet" href="css/style.css">
   </head>
   <body>
 <div id="wrap">
 <div id="regbar">
-<h2>    Edit <?php echo $username ?>'s Profile</h2>
+<h2>    Edit <?php echo htmlspecialchars($username) ?>'s Profile</h2>
 </div>
 </div>
     <hr>
