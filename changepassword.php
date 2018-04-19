@@ -6,7 +6,7 @@ if(isset($_SESSION['user'])) {
      header("Location: index.html");
 }
 
-include('password.txt');
+include('password.php');
 
 $connection = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if($connection->connect_errno) {

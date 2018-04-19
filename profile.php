@@ -35,7 +35,7 @@ header("Location: login.php");
 	</div>
 	<div class="comments">
 	<?php
-	$fh = fopen("comments.txt",'r');
+	$fh = fopen("../comments.txt",'r');
 	$text = fread($fh, 25000);
 	echo nl2br($text);
 	?>

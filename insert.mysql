@@ -1,7 +1,0 @@
-INSERT INTO login_info.UsernamePassword(username, password)
-VALUES
-	("sjobs", "hunter2"),
-	("bgates", "Cthulu15b@e"),
-	("djacobson", "h@ckTh3Pl@net!"),
-	("sjackson", "snakes?"),
-	("bmadoff", "$$billy'all");
