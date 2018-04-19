@@ -16,18 +16,17 @@ if($mysqli->connect_errno) {
 if(isset($_POST['submit'])) {
     if(!empty($_POST['password'])) {
         $password = $_POST['password'];
+	$newPassword = $_POST['newpassword'];
         $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $stmt->bind_result($daUsername, $daPassword);
         $stmt->fetch();
 	$stmt->close();
-          //$query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$username' AND password = '$_POST[password]'");
-        //$row = mysqli_fetch_array($query, MYSQLI_BOTH);
 
         if($daUsername != NULL AND $daPassword != NULL) {
             $ustmt = $mysqli->prepare("UPDATE UsernamePassword SET password=? where username=? and password=?");
-            $ustmt->bind_param("sss", $password, $daUsername, $daPassword);
+            $ustmt->bind_param("sss", $newPassword, $daUsername, $daPassword);
             $ustmt->execute();
             $ustmt->close();
 
