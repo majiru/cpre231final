@@ -16,7 +16,11 @@ $db = mysqli_select_db($connection, $db_name) or die("Failed to select database:
 
 if(isset($_POST['submit'])) {
     if(!empty($_POST['newusername'])) {
-    $connection->query("UPDATE UsernamePassword SET username = '$_POST[newusername]' WHERE username = '$username'");
+    $newname = $_POST['newusername'];
+    $stmt - $mysqli->prepare("UPDATE UsernamePassword SET username=? WHERE username=?");
+    $stmt->bind_param("ss", $newname, $username);
+    stmt->execute();
+    //$connection->query("UPDATE UsernamePassword SET username = '$_POST[newusername]' WHERE username = '$username'");
 
     $_SESSION['user'] = $_POST['newusername'];
     }
