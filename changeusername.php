@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
     $newname = $_POST['newusername'];
     $stmt = $mysqli->prepare("UPDATE UsernamePassword SET username=? WHERE username=?");
     $stmt->bind_param("ss", $newname, $username);
-    stmt->execute();
+    $stmt->execute();
     //$connection->query("UPDATE UsernamePassword SET username = '$_POST[newusername]' WHERE username = '$username'");
 
     $_SESSION['user'] = $_POST['newusername'];
