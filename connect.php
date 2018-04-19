@@ -1,32 +1,34 @@
 <?php
 include('password.php');
 
-$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+$mysqli = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 
-if($connection->connect_errno){
+if($mysqli->connect_errno){
 	die("Failed to connect to database: " .mysqli_error($connection));
 }
 
-$db = mysqli_select_db($connection, $db_name) or die("Failed to select database: " .mysqli_error());
 
 if(isset($_POST['submit'])) {
 	session_start();
-	if(!empty($_POST['user'])){
-		$query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$_POST[user]' AND password = '$_POST[password]'");
-		$row = mysqli_fetch_array($query, MYSQLI_BOTH);
-	
-		if(!empty($row['username']) AND !empty($row['password'])) {
-			if( file_exists('profile.php')){
-				$_SESSION['user'] = $row['username'];
-				header("Location: profile.php");	
-			}else{
-				echo "Login Successful.";
-			}
-		}
-		else
-		{
-			echo "Login Unsuccessful.";
-		}
-	}
+	if(!empty($_POST['user']) AND !empty($_POST['password'])){
+	//	$query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$_POST[user]' AND password = '$_POST[password]'");
+            //    $row = mysqli_fetch_array($query, MYSQLI_BOTH);
+
+            $password = $_POST['password'];
+            $username = $_POST['username'];
+
+            $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
+            $stmt->bind_param("ss", $username, $password);
+            $stmt->execute();
+            $stmt->bind_result($daUsername, $daPassword);
+            $stmt->fetch();
+            $stmt->close();
+
+            if($daUsername != null AND $daPassword != null){
+                $_SESSION['user'] = $daUsername;
+                header("Location: profile.php");
+            }else{
+                header("Location: index.html");
+            }
 }
 ?>
