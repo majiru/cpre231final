@@ -12,17 +12,24 @@ $connection = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if($connection->connect_errno) {
      die("Failed to connect to database: " .mysqli_error($connection));
 }
-$db = mysqli_select_db($connection, $db_name) or die("Failed to select database: " .mysqli_error());
 
 if(isset($_POST['submit'])) {
-     if(!empty($_POST['password'])) {
-          $query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$username' AND password = '$_POST[password]'");
-          $row = mysqli_fetch_array($query, MYSQLI_BOTH);
+    if(!empty($_POST['password'])) {
+        $password = $_POST['password'];
+        $stmt = $mysqli->prepare("select username, password from UsernamePassword where username=? and password=?");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $stmt->bind_result($daUsername, $daPassword);
+        $stmt->fetch();
+          //$query = mysqli_query($connection, "SELECT * FROM UsernamePassword where username = '$username' AND password = '$_POST[password]'");
+        //$row = mysqli_fetch_array($query, MYSQLI_BOTH);
 
-          if(!empty($row['username']) AND !empty($row['password'])) {
-               $query = mysqli_query($connection, "UPDATE UsernamePassword SET password = '$_POST[newpassword]' WHERE username = '$username' AND password = '$_POST[password]'");
-          }
-     }
-     header("Location: editprofile.php");
+        if($daUsername != NULL AND $daPassword != NULL) {
+            $ustmt = $mysqli->prepare("UPDATE UsernamePassword SET password=? where username=? and password=?");
+            $ustmt->bind_param("sss", $password, $daUsername, $daPassword);
+            $ustmt->execute()
+        }
+    }
+    header("Location: editprofile.php");
 }
 ?>
